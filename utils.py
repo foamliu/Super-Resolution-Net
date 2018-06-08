@@ -82,13 +82,13 @@ Used for subpixel phase shifting after deconv operations
 def _phase_shift(I, r):
     bsize, a, b, c = I.get_shape().as_list()
     bsize = K.shape(I)[0]  # Handling Dimension(None) type for undefined batch dim
-    X = Lambda(lambda x: K.reshape(x, (bsize, a, b, r, r)))(I)
+    X = Lambda(lambda x: tf.reshape(x, (bsize, a, b, r, r)))(I)
     X = Lambda(lambda x: tf.transpose(x, (0, 1, 2, 4, 3)))(X)   # bsize, a, b, 1, 1
     X = Lambda(lambda x: tf.split(x, a, 1))(X)  # a, [bsize, b, r, r]
-    X = Lambda(lambda X: K.concatenate([K.squeeze(x, axis=1) for x in X], 2))(X)    # bsize, b, a*r, r
+    X = Lambda(lambda X: tf.concat([tf.squeeze(x, axis=1) for x in X], 2))(X)    # bsize, b, a*r, r
     X = Lambda(lambda x: tf.split(x, b, 1))(X)  # b, [bsize, a*r, r]
-    X = Lambda(lambda X: K.concatenate([K.squeeze(x, axis=1) for x in X], 2))(X)    # bsize, a*r, b*r
-    return Lambda(lambda x: K.reshape(x, (bsize, a * r, b * r, 1)))(X)
+    X = Lambda(lambda X: tf.concat([tf.squeeze(x, axis=1) for x in X], 2))(X)    # bsize, a*r, b*r
+    return Lambda(lambda x: tf.reshape(x, (bsize, a * r, b * r, 1)))(X)
 
 
 """
@@ -100,7 +100,7 @@ Used for subpixel phase shifting after deconv operations
 def PS(X, r, color=False):
     if color:
         Xc = Lambda(lambda x: tf.split(x, 3, 3))(X)
-        X = Lambda(lambda xc: K.concatenate([_phase_shift(x, r) for x in xc], 3))(Xc)
+        X = Lambda(lambda xc: tf.concat([_phase_shift(x, r) for x in xc], 3))(Xc)
     else:
         X = _phase_shift(X, r)
     return X
