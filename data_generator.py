@@ -7,7 +7,7 @@ import numpy as np
 import sklearn.neighbors as nn
 from keras.utils import Sequence
 
-from config import batch_size, img_rows, img_cols, nb_neighbors
+from config import batch_size, img_rows, img_cols
 
 image_folder = '/mnt/code/ImageNet-Downloader/image/resized'
 

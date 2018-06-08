@@ -1,70 +1,68 @@
 import keras.backend as K
-import tensorflow as tf
-from keras.layers import Input, Conv2D, BatchNormalization, UpSampling2D
+from keras.layers import Input, Conv2D
 from keras.models import Model
-from keras.utils import multi_gpu_model
 from keras.utils import plot_model
 
-from config import img_rows, img_cols, num_classes
+import utils
+from config import img_size, channels, feature_size, kernel, num_layers, scaling_factor
 
 
-def build_encoder_decoder():
-    kernel = 3
+def build_model():
+    input_tensor = Input(shape=(img_size, img_size, channels))
 
-    input_tensor = Input(shape=(img_rows, img_cols, 1))
-    x = Conv2D(64, (kernel, kernel), activation='relu', padding='same', name='conv1_1')(input_tensor)
-    x = Conv2D(64, (kernel, kernel), activation='relu', padding='same', name='conv1_2', strides=(2, 2))(x)
-    x = BatchNormalization()(x)
+    # One convolution before res blocks and to convert to required feature depth
+    x = Conv2D(feature_size, (kernel, kernel), activation='relu', padding='same', name='conv1_1')(input_tensor)
 
-    x = Conv2D(128, (kernel, kernel), activation='relu', padding='same', name='conv2_1')(x)
-    x = Conv2D(128, (kernel, kernel), activation='relu', padding='same', name='conv2_2', strides=(2, 2))(x)
-    x = BatchNormalization()(x)
+    # Store the output of the first convolution to add later
+    conv_1 = x
 
-    x = Conv2D(256, (kernel, kernel), activation='relu', padding='same', name='conv3_1')(x)
-    x = Conv2D(256, (kernel, kernel), activation='relu', padding='same', name='conv3_2')(x)
-    x = Conv2D(256, (kernel, kernel), activation='relu', padding='same', name='conv3_3', strides=(2, 2))(x)
-    x = BatchNormalization()(x)
+    """
+    This creates `num_layers` number of resBlocks
+    a resBlock is defined in the paper as
+    (excuse the ugly ASCII graph)
+    x
+    |\
+    | \
+    |  conv2d
+    |  relu
+    |  conv2d
+    | /
+    |/
+    + (addition here)
+    |
+    result
+    """
 
-    x = Conv2D(512, (kernel, kernel), activation='relu', padding='same', name='conv4_1')(x)
-    x = Conv2D(512, (kernel, kernel), activation='relu', padding='same', name='conv4_2')(x)
-    x = Conv2D(512, (kernel, kernel), activation='relu', padding='same', name='conv4_3')(x)
-    x = BatchNormalization()(x)
+    """
+    Doing scaling here as mentioned in the paper:
+    `we found that increasing the number of feature
+    maps above a certain level would make the training procedure
+    numerically unstable. A similar phenomenon was
+    reported by Szegedy et al. We resolve this issue by
+    adopting the residual scaling with factor 0.1. In each
+    residual block, constant scaling layers are placed after the
+    last convolution layers. These modules stabilize the training
+    procedure greatly when using a large number of filters.
+    In the test phase, this layer can be integrated into the previous
+    convolution layer for the computational efficiency.'
+    """
 
-    x = Conv2D(512, (kernel, kernel), activation='relu', padding='same', dilation_rate=2, name='conv5_1')(x)
-    x = Conv2D(512, (kernel, kernel), activation='relu', padding='same', dilation_rate=2, name='conv5_2')(x)
-    x = Conv2D(512, (kernel, kernel), activation='relu', padding='same', dilation_rate=2, name='conv5_3')(x)
-    x = BatchNormalization()(x)
+    # Add the residual blocks to the model
+    for i in range(num_layers):
+        x = utils.res_block(x, feature_size, scale=scaling_factor)
 
-    x = Conv2D(512, (kernel, kernel), activation='relu', padding='same', dilation_rate=2, name='conv6_1')(x)
-    x = Conv2D(512, (kernel, kernel), activation='relu', padding='same', dilation_rate=2, name='conv6_2')(x)
-    x = Conv2D(512, (kernel, kernel), activation='relu', padding='same', dilation_rate=2, name='conv6_3')(x)
-    x = BatchNormalization()(x)
+    x = Conv2D(feature_size, (kernel, kernel), padding='same')(x)
+    x += conv_1
 
-    x = Conv2D(256, (kernel, kernel), activation='relu', padding='same', name='conv7_1')(x)
-    x = Conv2D(256, (kernel, kernel), activation='relu', padding='same', name='conv7_2')(x)
-    x = Conv2D(256, (kernel, kernel), activation='relu', padding='same', name='conv7_3')(x)
-    x = BatchNormalization()(x)
+    # Upsample output of the convolution
+    outputs = x
 
-    x = UpSampling2D(size=(2, 2))(x)
-    x = Conv2D(128, (kernel, kernel), activation='relu', padding='same', name='conv8_1')(x)
-    x = Conv2D(128, (kernel, kernel), activation='relu', padding='same', name='conv8_2')(x)
-    x = Conv2D(128, (kernel, kernel), activation='relu', padding='same', name='conv8_3')(x)
-    x = BatchNormalization()(x)
-
-    outputs = Conv2D(num_classes, (1, 1), activation='softmax', padding='same', name='pred')(x)
-
-    model = Model(inputs=input_tensor, outputs=outputs, name="ColorNet")
+    model = Model(inputs=input_tensor, outputs=outputs, name="EDSR")
     return model
 
 
 if __name__ == '__main__':
-    with tf.device("/cpu:0"):
-        encoder_decoder = build_encoder_decoder()
-    print(encoder_decoder.summary())
-    plot_model(encoder_decoder, to_file='encoder_decoder.svg', show_layer_names=True, show_shapes=True)
-
-    parallel_model = multi_gpu_model(encoder_decoder, gpus=None)
-    print(parallel_model.summary())
-    plot_model(parallel_model, to_file='parallel_model.svg', show_layer_names=True, show_shapes=True)
-
+    model = build_model()
+    print(model.summary())
+    plot_model(model, to_file='encoder_decoder.svg', show_layer_names=True, show_shapes=True)
     K.clear_session()
