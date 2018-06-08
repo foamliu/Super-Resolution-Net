@@ -60,8 +60,8 @@ class DataGenSequence(Sequence):
                 x = np.fliplr(x)
                 y = np.fliplr(y)
 
-            batch_x[i_batch, :, :, 0] = x
-            batch_y[i_batch] = y
+            batch_x[i_batch, :, :] = x
+            batch_y[i_batch, :, :] = y
 
             i += 1
 
