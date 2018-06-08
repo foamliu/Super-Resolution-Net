@@ -1,19 +1,18 @@
 import multiprocessing
 
 import cv2 as cv
-from keras.layers import Conv2D, PReLU
-import keras.backend as K
 import tensorflow as tf
 import tensorflow.contrib.slim as slim
+from keras.layers import Conv2D, PReLU
 from tensorflow.python.client import device_lib
+
 from config import kernel
 
 
-def categorical_crossentropy_color(y_true, y_pred):
-    cross_ent = K.categorical_crossentropy(y_pred, y_true)
-    cross_ent = K.mean(cross_ent, axis=-1)
+def custom_loss(y_true, y_pred):
+    loss = tf.reduce_mean(tf.losses.absolute_difference(y_true, y_pred))
 
-    return cross_ent
+    return loss
 
 
 # getting the number of GPUs
@@ -40,7 +39,7 @@ stride: convolution stride
 def res_block(x, channels=64, scale=1):
     tmp = Conv2D(channels, (kernel, kernel), padding='same')(x)
     tmp = PReLU(tmp)
-    tmp =Conv2D(channels, (kernel, kernel), padding='same')(tmp)
+    tmp = Conv2D(channels, (kernel, kernel), padding='same')(tmp)
     tmp *= scale
     return x + tmp
 

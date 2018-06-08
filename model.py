@@ -4,14 +4,14 @@ from keras.models import Model
 from keras.utils import plot_model
 
 import utils
-from config import img_size, channels, feature_size, kernel, num_layers, scaling_factor
+from config import img_size, channel, feature_size, kernel, num_layers, scaling_factor
 
 
 def build_model():
-    input_tensor = Input(shape=(img_size, img_size, channels))
+    input_tensor = Input(shape=(img_size, img_size, channel))
 
     # One convolution before res blocks and to convert to required feature depth
-    x = Conv2D(feature_size, (kernel, kernel), activation='relu', padding='same', name='conv1_1')(input_tensor)
+    x = Conv2D(feature_size, (kernel, kernel), activation='relu', padding='same', name='conv1')(input_tensor)
 
     # Store the output of the first convolution to add later
     conv_1 = x
@@ -62,7 +62,7 @@ def build_model():
 
 
 if __name__ == '__main__':
-    model = build_model()
-    print(model.summary())
-    plot_model(model, to_file='encoder_decoder.svg', show_layer_names=True, show_shapes=True)
+    m = build_model()
+    print(m.summary())
+    plot_model(m, to_file='encoder_decoder.svg', show_layer_names=True, show_shapes=True)
     K.clear_session()
