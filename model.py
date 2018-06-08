@@ -4,7 +4,7 @@ from keras.models import Model
 from keras.utils import plot_model
 
 import utils
-from config import img_size, channel, feature_size, kernel, num_layers, scaling_factor
+from config import img_size, channel, feature_size, kernel, num_layers, scaling_factor, scale
 
 
 def build_model():
@@ -55,6 +55,8 @@ def build_model():
     x = Add()([x, conv_1])
 
     # Upsample output of the convolution
+    x = utils.upsample(x, scale, feature_size, None)
+
     outputs = x
 
     model = Model(inputs=input_tensor, outputs=outputs, name="EDSR")
