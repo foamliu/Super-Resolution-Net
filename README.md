@@ -1,34 +1,40 @@
-# Super Resolution Net
+# 超分辨率网络
 
 ![apm](https://img.shields.io/apm/l/vim-mode.svg)
 
-This repository is to repeat Colorful Image Colorization with Color-Net.
+EDSR 的 Keras 实现。
 
-## Dependencies
+## 原理
+
+请参照论文 [Enhanced Deep Residual Networks for Single Image Super-Resolution](https://arxiv.org/pdf/1707.02921.pdf)。
+
+此处代码参照了原作者的 Torch 实现：[NTIRE2017](https://github.com/LimBee/NTIRE2017) 和 jmiller656 的 Tensorflow 实现 [EDSR-Tensorflow] (https://github.com/jmiller656/EDSR-Tensorflow).
+
+## 依赖
 - [NumPy](http://docs.scipy.org/doc/numpy-1.10.1/user/install.html)
 - [Tensorflow](https://www.tensorflow.org/versions/r0.8/get_started/os_setup.html)
 - [Keras](https://keras.io/#installation)
 - [OpenCV](https://opencv-python-tutroals.readthedocs.io/en/latest/)
 
-## Dataset
+## 数据集
 
 ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/imagenet.png)
 
 Follow the [instruction](https://github.com/foamliu/ImageNet-Downloader) to download ImageNet dataset.
 
-## Architecture
+## 架构
 
 ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/color_net.png)
 
 
-## Usage
-### Data Pre-processing
+## 如何使用
+### 数据预处理
 Extract training images:
 ```bash
 $ python pre-process.py
 ```
 
-### Train
+### 训练
 ```bash
 $ python train.py
 ```
@@ -38,13 +44,13 @@ If you want to visualize during training, run in your terminal:
 $ tensorboard --logdir path_to_current_dir/logs
 ```
 
-### Demo
+### 演示
 
 ```bash
 $ python demo.py
 ```
 
-Input | Output | GT | 
+输入 | 输出 | 目标 | 
 |---|---|---|
 |![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_out.png)| ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_gt.png)|
 |![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_out.png)| ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_gt.png)|
