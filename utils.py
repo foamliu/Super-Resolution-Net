@@ -1,10 +1,9 @@
 import multiprocessing
 
 import cv2 as cv
-import tensorflow as tf
 import keras.backend as K
-import tensorflow.contrib.slim as slim
-from keras.layers import Conv2D, PReLU
+import tensorflow as tf
+from keras.layers import Conv2D, Add, Multiply
 from tensorflow.python.client import device_lib
 
 from config import kernel
@@ -40,8 +39,8 @@ stride: convolution stride
 def res_block(x, channels=64, scale=1):
     tmp = Conv2D(channels, (kernel, kernel), activation='relu', padding='same')(x)
     tmp = Conv2D(channels, (kernel, kernel), padding='same')(tmp)
-    tmp *= scale
-    return x + tmp
+    tmp = Multiply()([tmp, scale])
+    return Add()([x, tmp])
 
 
 """

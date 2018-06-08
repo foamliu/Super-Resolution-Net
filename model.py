@@ -1,5 +1,5 @@
 import keras.backend as K
-from keras.layers import Input, Conv2D
+from keras.layers import Input, Conv2D, Add
 from keras.models import Model
 from keras.utils import plot_model
 
@@ -52,7 +52,7 @@ def build_model():
         x = utils.res_block(x, feature_size, scale=scaling_factor)
 
     x = Conv2D(feature_size, (kernel, kernel), padding='same')(x)
-    x += conv_1
+    x = Add()([x, conv_1])
 
     # Upsample output of the convolution
     outputs = x
