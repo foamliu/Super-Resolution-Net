@@ -8,5 +8,5 @@ scaling_factor = 0.1
 batch_size = 160
 epochs = 10000
 patience = 50
-num_train_samples = 884560
-num_valid_samples = 7134
+num_train_samples = 781987
+num_valid_samples = 6307
