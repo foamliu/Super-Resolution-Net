@@ -2,6 +2,7 @@ import multiprocessing
 
 import cv2 as cv
 import tensorflow as tf
+import keras.backend as K
 import tensorflow.contrib.slim as slim
 from keras.layers import Conv2D, PReLU
 from tensorflow.python.client import device_lib
@@ -59,16 +60,16 @@ def upsample(x, scale=2, features=64, activation=tf.nn.relu):
     x = Conv2D(features, (kernel, kernel), padding='same')(x)
     if scale == 2:
         ps_features = 3 * (scale ** 2)
-        x = slim.conv2d(x, ps_features, [3, 3], activation_fn=activation)
+        x = Conv2D(ps_features, (kernel, kernel), activation='relu', padding='same')(x)
         x = PS(x, 2, color=True)
     elif scale == 3:
         ps_features = 3 * (scale ** 2)
-        x = slim.conv2d(x, ps_features, [3, 3], activation_fn=activation)
+        x = Conv2D(ps_features, (kernel, kernel), activation='relu', padding='same')(x)
         x = PS(x, 3, color=True)
     elif scale == 4:
         ps_features = 3 * (2 ** 2)
         for i in range(2):
-            x = slim.conv2d(x, ps_features, [3, 3], activation_fn=activation)
+            x = Conv2D(ps_features, (kernel, kernel), activation='relu', padding='same')(x)
             x = PS(x, 2, color=True)
     return x
 
