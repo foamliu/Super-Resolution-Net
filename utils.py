@@ -54,21 +54,21 @@ activation: activation function
 """
 
 
-def upsample(x, scale=2, features=64, activation=tf.nn.relu):
+def upsample(x, scale=2, features=64):
     assert scale in [2, 3, 4]
     x = Conv2D(features, (kernel, kernel), padding='same')(x)
     if scale == 2:
         ps_features = 3 * (scale ** 2)
-        x = Conv2D(ps_features, (kernel, kernel), activation='relu', padding='same')(x)
+        x = Conv2D(ps_features, (kernel, kernel), padding='same')(x)
         x = PS(x, 2, color=True)
     elif scale == 3:
         ps_features = 3 * (scale ** 2)
-        x = Conv2D(ps_features, (kernel, kernel), activation='relu', padding='same')(x)
+        x = Conv2D(ps_features, (kernel, kernel), padding='same')(x)
         x = PS(x, 3, color=True)
     elif scale == 4:
         ps_features = 3 * (2 ** 2)
         for i in range(2):
-            x = Conv2D(ps_features, (kernel, kernel), activation='relu', padding='same')(x)
+            x = Conv2D(ps_features, (kernel, kernel), padding='same')(x)
             x = PS(x, 2, color=True)
     return x
 

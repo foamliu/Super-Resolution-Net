@@ -55,7 +55,7 @@ def build_model():
     x = Add()([x, conv_1])
 
     # Upsample output of the convolution
-    x = utils.upsample(x, scale, feature_size, None)
+    x = utils.upsample(x, scale, feature_size)
 
     outputs = x
 
