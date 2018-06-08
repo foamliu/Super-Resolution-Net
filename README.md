@@ -8,7 +8,9 @@ EDSR 的 Keras 实现。
 
 请参照论文 [Enhanced Deep Residual Networks for Single Image Super-Resolution](https://arxiv.org/pdf/1707.02921.pdf)。
 
-此处代码参照了原作者的 Torch 实现：[NTIRE2017](https://github.com/LimBee/NTIRE2017) 和 jmiller656 的 Tensorflow 实现 [EDSR-Tensorflow] (https://github.com/jmiller656/EDSR-Tensorflow).
+本代码参照了原作者的 Torch 实现：[NTIRE2017](https://github.com/LimBee/NTIRE2017) 和 jmiller656 的 Tensorflow 实现 [EDSR-Tensorflow](https://github.com/jmiller656/EDSR-Tensorflow).
+
+![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/color_net.png)
 
 ## 依赖
 - [NumPy](http://docs.scipy.org/doc/numpy-1.10.1/user/install.html)
@@ -20,26 +22,18 @@ EDSR 的 Keras 实现。
 
 ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/imagenet.png)
 
-Follow the [instruction](https://github.com/foamliu/ImageNet-Downloader) to download ImageNet dataset.
-
-## 架构
-
-![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/color_net.png)
+按照 [说明](https://github.com/foamliu/ImageNet-Downloader) 下载 ImageNet 数据集。
 
 
 ## 如何使用
-### 数据预处理
-Extract training images:
-```bash
-$ python pre-process.py
-```
+
 
 ### 训练
 ```bash
 $ python train.py
 ```
 
-If you want to visualize during training, run in your terminal:
+如果想可视化训练效果，请运行:
 ```bash
 $ tensorboard --logdir path_to_current_dir/logs
 ```
