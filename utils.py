@@ -6,13 +6,12 @@ import tensorflow as tf
 from keras.layers import Conv2D, Add, Lambda
 from tensorflow.python.client import device_lib
 
-from config import kernel
+from config import kernel, epsilon_sqr
 
 
 def custom_loss(y_true, y_pred):
-    loss = tf.reduce_mean(tf.losses.absolute_difference(y_true, y_pred))
-
-    return loss
+    diff = y_pred - y_true
+    return K.mean(K.sqrt(K.square(diff) + epsilon_sqr))
 
 
 # getting the number of GPUs
@@ -83,11 +82,11 @@ def _phase_shift(I, r):
     bsize, a, b, c = I.get_shape().as_list()
     bsize = K.shape(I)[0]  # Handling Dimension(None) type for undefined batch dim
     X = Lambda(lambda x: tf.reshape(x, (bsize, a, b, r, r)))(I)
-    X = Lambda(lambda x: tf.transpose(x, (0, 1, 2, 4, 3)))(X)   # bsize, a, b, 1, 1
+    X = Lambda(lambda x: tf.transpose(x, (0, 1, 2, 4, 3)))(X)  # bsize, a, b, 1, 1
     X = Lambda(lambda x: tf.split(x, a, 1))(X)  # a, [bsize, b, r, r]
-    X = Lambda(lambda X: tf.concat([tf.squeeze(x, axis=1) for x in X], 2))(X)    # bsize, b, a*r, r
+    X = Lambda(lambda X: tf.concat([tf.squeeze(x, axis=1) for x in X], 2))(X)  # bsize, b, a*r, r
     X = Lambda(lambda x: tf.split(x, b, 1))(X)  # b, [bsize, a*r, r]
-    X = Lambda(lambda X: tf.concat([tf.squeeze(x, axis=1) for x in X], 2))(X)    # bsize, a*r, b*r
+    X = Lambda(lambda X: tf.concat([tf.squeeze(x, axis=1) for x in X], 2))(X)  # bsize, a*r, b*r
     return Lambda(lambda x: tf.reshape(x, (bsize, a * r, b * r, 1)))(X)
 
 
