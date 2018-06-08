@@ -14,7 +14,7 @@ def build_model():
     x = Conv2D(feature_size, (kernel, kernel), activation='relu', padding='same', name='conv1')(input_tensor)
 
     # Store the output of the first convolution to add later
-    conv_1 = x
+    # conv_1 = x
 
     """
     This creates `num_layers` number of resBlocks
@@ -48,11 +48,11 @@ def build_model():
     """
 
     # Add the residual blocks to the model
-    for i in range(num_layers):
-        x = utils.res_block(x, feature_size, scale=scaling_factor)
+    # for i in range(num_layers):
+    #     x = utils.res_block(x, feature_size, scale=scaling_factor)
 
-    x = Conv2D(feature_size, (kernel, kernel), padding='same')(x)
-    x = Add()([x, conv_1])
+    # x = Conv2D(feature_size, (kernel, kernel), padding='same')(x)
+    # x = Add()([x, conv_1])
 
     # Upsample output of the convolution
     # x = utils.upsample(x, scale, feature_size, None)
