@@ -15,8 +15,8 @@ def random_crop(image_bgr):
     img_size = image_bgr.shape[0]
     x_size = img_size
     y_size = img_size * scale
-    u = random.choice(range(img_size - y_size))
-    v = random.choice(range(img_size - y_size))
+    u = random.randint(0, img_size - y_size)
+    v = random.randint(0, img_size - y_size)
     y = image_bgr[v:v + y_size, u:u + y_size]
     x = cv.resize(y, (x_size, x_size), cv.INTER_CUBIC)
     return x, y
