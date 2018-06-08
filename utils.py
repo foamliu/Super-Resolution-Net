@@ -39,7 +39,7 @@ stride: convolution stride
 def res_block(x, channels=64, scale=1):
     tmp = Conv2D(channels, (kernel, kernel), activation='relu', padding='same')(x)
     tmp = Conv2D(channels, (kernel, kernel), padding='same')(tmp)
-    tmp = Multiply()([tmp, scale])
+    tmp *= scale
     return Add()([x, tmp])
 
 
