@@ -3,7 +3,7 @@ import multiprocessing
 import cv2 as cv
 import keras.backend as K
 import tensorflow as tf
-from keras.layers import Conv2D, Add, Multiply
+from keras.layers import Conv2D, Add, Lambda
 from tensorflow.python.client import device_lib
 
 from config import kernel
@@ -82,13 +82,13 @@ Used for subpixel phase shifting after deconv operations
 def _phase_shift(I, r):
     bsize, a, b, c = I.get_shape().as_list()
     bsize = K.shape(I)[0]  # Handling Dimension(None) type for undefined batch dim
-    X = K.reshape(I, (bsize, a, b, r, r))
-    X = tf.transpose(X, (0, 1, 2, 4, 3))  # bsize, a, b, 1, 1
-    X = tf.split(X, a, 1)  # a, [bsize, b, r, r]
-    X = K.concatenate([K.squeeze(x, axis=1) for x in X], 2)  # bsize, b, a*r, r
-    X = tf.split(X, b, 1)  # b, [bsize, a*r, r]
-    X = K.concatenate([K.squeeze(x, axis=1) for x in X], 2)  # bsize, a*r, b*r
-    return K.reshape(X, (bsize, a * r, b * r, 1))
+    X = Lambda(lambda x: K.reshape(I, (bsize, a, b, r, r)))(I)
+    X = Lambda(lambda x: tf.transpose(X, (0, 1, 2, 4, 3)))(X)   # bsize, a, b, 1, 1
+    X = Lambda(lambda x: tf.split(X, a, 1))(X)  # a, [bsize, b, r, r]
+    X = Lambda(lambda x: K.concatenate([K.squeeze(x, axis=1) for x in X], 2))(X)    # bsize, b, a*r, r
+    X = Lambda(lambda x: tf.split(X, b, 1))(X)  # b, [bsize, a*r, r]
+    X = Lambda(lambda x: K.concatenate([K.squeeze(x, axis=1) for x in X], 2))(X)    # bsize, a*r, b*r
+    return Lambda(lambda x: K.reshape(X, (bsize, a * r, b * r, 1)))(X)
 
 
 """
@@ -99,8 +99,8 @@ Used for subpixel phase shifting after deconv operations
 
 def PS(X, r, color=False):
     if color:
-        Xc = tf.split(X, 3, 3)
-        X = K.concatenate([_phase_shift(x, r) for x in Xc], 3)
+        Xc = Lambda(lambda x: tf.split(X, 3, 3))(X)
+        X = Lambda(lambda x: K.concatenate([_phase_shift(x, r) for x in Xc], 3))(Xc)
     else:
         X = _phase_shift(X, r)
     return X
