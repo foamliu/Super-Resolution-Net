@@ -10,7 +10,8 @@ EDSR 的 Keras 实现。
 
 本代码参照了原作者的 Torch 实现：[NTIRE2017](https://github.com/LimBee/NTIRE2017) 和 jmiller656 的 Tensorflow 实现 [EDSR-Tensorflow](https://github.com/jmiller656/EDSR-Tensorflow).
 
-![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/color_net.png)
+EDSR (单尺度模型。 我们提供尺寸x2，x3，x4的模型).
+![image](https://github.com/LimBee/NTIRE2017/raw/master/figs/EDSR.png)
 
 ## 依赖
 - [NumPy](http://docs.scipy.org/doc/numpy-1.10.1/user/install.html)
