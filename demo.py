@@ -36,7 +36,7 @@ if __name__ == '__main__':
         x, y = random_crop(image_bgr)
 
         # L: 0 <=L<= 255, a: 42 <=a<= 226, b: 20 <=b<= 223.
-        out = model.predict(preprocess_input(x))
+        out = model.predict(preprocess_input(x.astype(np.float32)))
         out = out.reshape((h, w, 3))
         out = tf.clip_by_value(out, 0.0, 255.0)
         out = out.astype(np.uint8)

@@ -67,7 +67,7 @@ class DataGenSequence(Sequence):
                 x = np.fliplr(x)
                 y = np.fliplr(y)
 
-            batch_x[i_batch, :, :] = preprocess_input(x)
+            batch_x[i_batch, :, :] = preprocess_input(x.astype(np.float32))
             batch_y[i_batch, :, :] = y
 
             i += 1

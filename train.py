@@ -53,7 +53,7 @@ if __name__ == '__main__':
             new_model.load_weights(pretrained_path)
 
     adam = keras.optimizers.Adam(lr=1e-4, epsilon=1e-8)
-    new_model.compile(optimizer='nadam', loss=custom_loss)
+    new_model.compile(optimizer=adam, loss=custom_loss)
 
     print(new_model.summary())
 
