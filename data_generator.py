@@ -22,6 +22,13 @@ def random_crop(image_bgr):
     return x, y
 
 
+def preprocess_input(x):
+    x /= 255.
+    x -= 0.5
+    x *= 2.
+    return x
+
+
 class DataGenSequence(Sequence):
     def __init__(self, usage):
         self.usage = usage
@@ -60,7 +67,7 @@ class DataGenSequence(Sequence):
                 x = np.fliplr(x)
                 y = np.fliplr(y)
 
-            batch_x[i_batch, :, :] = x
+            batch_x[i_batch, :, :] = preprocess_input(x)
             batch_y[i_batch, :, :] = y
 
             i += 1

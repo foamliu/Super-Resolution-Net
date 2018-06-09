@@ -1,9 +1,9 @@
-img_size = 32
+img_size = 48
 channel = 3
 kernel = 3
 num_layers = 32
 feature_size = 256
-scale = 4
+scale = 2
 scaling_factor = 0.1
 batch_size = 160
 epochs = 10000

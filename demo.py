@@ -7,7 +7,7 @@ import keras.backend as K
 import numpy as np
 import tensorflow as tf
 from config import img_size, scale
-from data_generator import random_crop
+from data_generator import random_crop, preprocess_input
 from model import build_model
 
 if __name__ == '__main__':
@@ -36,7 +36,7 @@ if __name__ == '__main__':
         x, y = random_crop(image_bgr)
 
         # L: 0 <=L<= 255, a: 42 <=a<= 226, b: 20 <=b<= 223.
-        out = model.predict(x)
+        out = model.predict(preprocess_input(x))
         out = out.reshape((h, w, 3))
         out = tf.clip_by_value(out, 0.0, 255.0)
         out = out.astype(np.uint8)

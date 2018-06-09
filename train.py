@@ -52,7 +52,7 @@ if __name__ == '__main__':
         if pretrained_path is not None:
             new_model.load_weights(pretrained_path)
 
-    # sgd = keras.optimizers.SGD(lr=0.001, momentum=0.9, decay=0.0005, nesterov=True)
+    adam = keras.optimizers.Adam(lr=1e-4, epsilon=1e-8)
     new_model.compile(optimizer='nadam', loss=custom_loss)
 
     print(new_model.summary())
