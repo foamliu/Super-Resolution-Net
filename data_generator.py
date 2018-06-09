@@ -5,7 +5,7 @@ from random import shuffle
 import cv2 as cv
 import numpy as np
 from keras.utils import Sequence
-
+import imutils
 from config import batch_size, img_size, scale, channel
 
 image_folder = '/mnt/code/ImageNet-Downloader/image/resized'
@@ -13,13 +13,11 @@ image_folder = '/mnt/code/ImageNet-Downloader/image/resized'
 
 def random_crop(image_bgr):
     full_size = image_bgr.shape[0]
-    x_size = img_size
     y_size = img_size * scale
     u = random.randint(0, full_size - y_size)
     v = random.randint(0, full_size - y_size)
     y = image_bgr[v:v + y_size, u:u + y_size]
-    x = cv.resize(y, (x_size, x_size), cv.INTER_CUBIC)
-    return x, y
+    return y
 
 
 def preprocess_input(x):
@@ -61,11 +59,15 @@ class DataGenSequence(Sequence):
             # b: 0 <=b<=255, g: 0 <=g<=255, r: 0 <=r<=255.
             image_bgr = cv.imread(filename)
 
-            x, y = random_crop(image_bgr)
+            y = random_crop(image_bgr)
 
             if np.random.random_sample() > 0.5:
-                x = np.fliplr(x)
                 y = np.fliplr(y)
+
+            angle = random.choice((0, 90, 180, 270))
+            y = imutils.rotate_bound(y, angle)
+
+            x = cv.resize(y, (img_size, img_size), cv.INTER_CUBIC)
 
             batch_x[i_batch, :, :] = preprocess_input(x.astype(np.float32))
             batch_y[i_batch, :, :] = y
