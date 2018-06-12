@@ -59,7 +59,7 @@ def build_model():
 
     outputs = x
 
-    model = Model(inputs=input_tensor, outputs=outputs, name="EDSR")
+    model = Model(inputs=input_tensor, outputs=outputs, name="EDRN")
     return model
 
 
