@@ -28,7 +28,7 @@ def get_available_cpus():
 """
 Creates a convolutional residual block
 as defined in the paper. More on
-this inside model.py
+this inside EDSR.py
 x: input to pass through the residual block
 channels: number of channels to compute
 stride: convolution stride

@@ -8,7 +8,7 @@ import numpy as np
 
 from config import img_size, scale
 from data_generator import random_crop, preprocess_input
-from model import build_model
+from EDSR import build_model
 
 if __name__ == '__main__':
     channel = 3
