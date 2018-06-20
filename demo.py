@@ -36,7 +36,9 @@ if __name__ == '__main__':
         y = random_crop(image_bgr)
 
         x = cv.resize(y, (img_size, img_size), cv.INTER_CUBIC)
-        out = model.predict(preprocess_input(x.astype(np.float32)))
+        x = preprocess_input(x.astype(np.float32))
+        x = np.expand_dims(x, axis=0)
+        out = model.predict()
         out = out.reshape((h, w, 3))
         out = tf.clip_by_value(out, 0.0, 255.0)
         out = out.astype(np.uint8)
