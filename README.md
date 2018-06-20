@@ -39,6 +39,8 @@ $ python train.py
 $ tensorboard --logdir path_to_current_dir/logs
 ```
 
+![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/learning_curve.png)
+
 ### 演示
 
 ```bash
