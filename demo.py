@@ -5,7 +5,7 @@ import random
 import cv2 as cv
 import keras.backend as K
 import numpy as np
-import tensorflow as tf
+
 from config import img_size, scale
 from data_generator import random_crop, preprocess_input
 from model import build_model
@@ -37,8 +37,9 @@ if __name__ == '__main__':
 
         x = cv.resize(y, (img_size, img_size), cv.INTER_CUBIC)
         x = preprocess_input(x.astype(np.float32))
-        x = np.expand_dims(x, axis=0)
-        out = model.predict(x)
+        x_test = np.empty((1, img_size, img_size, 3), dtype=np.float32)
+        x_test[0] = x
+        out = model.predict(x_test)
         out = out.reshape((h, w, 3))
         out = np.clip(out, 0.0, 255.0)
         out = out.astype(np.uint8)
