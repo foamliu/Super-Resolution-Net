@@ -33,9 +33,9 @@ if __name__ == '__main__':
         filename = os.path.join(image_folder, image_name)
         print('Start processing image: {}'.format(filename))
         image_bgr = cv.imread(filename)
-        x, y = random_crop(image_bgr)
+        y = random_crop(image_bgr)
 
-        # L: 0 <=L<= 255, a: 42 <=a<= 226, b: 20 <=b<= 223.
+        x = cv.resize(y, (img_size, img_size), cv.INTER_CUBIC)
         out = model.predict(preprocess_input(x.astype(np.float32)))
         out = out.reshape((h, w, 3))
         out = tf.clip_by_value(out, 0.0, 255.0)
