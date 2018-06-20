@@ -3,7 +3,6 @@ channel = 3
 kernel = 3
 num_layers = 32
 feature_size = 256
-scale = 4
 scaling_factor = 0.1
 batch_size = 160
 epochs = 10000

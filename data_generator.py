@@ -6,12 +6,12 @@ import cv2 as cv
 import numpy as np
 from keras.utils import Sequence
 import imutils
-from config import batch_size, img_size, scale, channel
+from config import batch_size, img_size, channel
 
 image_folder = '/mnt/code/ImageNet-Downloader/image/resized'
 
 
-def random_crop(image_bgr):
+def random_crop(image_bgr, scale):
     full_size = image_bgr.shape[0]
     y_size = img_size * scale
     u = random.randint(0, full_size - y_size)
@@ -28,8 +28,9 @@ def preprocess_input(x):
 
 
 class DataGenSequence(Sequence):
-    def __init__(self, usage):
+    def __init__(self, usage, scale):
         self.usage = usage
+        self.scale = scale
 
         if usage == 'train':
             names_file = 'train_names.txt'
@@ -47,7 +48,7 @@ class DataGenSequence(Sequence):
     def __getitem__(self, idx):
         i = idx * batch_size
 
-        out_img_rows, out_img_cols = img_size * scale, img_size * scale
+        out_img_rows, out_img_cols = img_size * self.scale, img_size * self.scale
 
         length = min(batch_size, (len(self.names) - i))
         batch_x = np.empty((length, img_size, img_size, channel), dtype=np.float32)
@@ -80,12 +81,12 @@ class DataGenSequence(Sequence):
         np.random.shuffle(self.names)
 
 
-def train_gen():
-    return DataGenSequence('train')
+def train_gen(scale):
+    return DataGenSequence('train', scale)
 
 
-def valid_gen():
-    return DataGenSequence('valid')
+def valid_gen(scale):
+    return DataGenSequence('valid', scale)
 
 
 def split_data():

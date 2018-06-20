@@ -6,12 +6,13 @@ import cv2 as cv
 import keras.backend as K
 import numpy as np
 
-from config import img_size, scale
-from data_generator import random_crop, preprocess_input
 from EDSR import build_model
+from config import img_size
+from data_generator import random_crop, preprocess_input
 
 if __name__ == '__main__':
     channel = 3
+    scale = 4
 
     model_weights_path = 'models/model.16-9.0500.hdf5'
     model = build_model()

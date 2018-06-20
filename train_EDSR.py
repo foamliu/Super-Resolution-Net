@@ -5,12 +5,14 @@ import tensorflow as tf
 from keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
 from keras.utils import multi_gpu_model
 
+from EDSR import build_model
 from config import patience, epochs, num_train_samples, num_valid_samples, batch_size
 from data_generator import train_gen, valid_gen
-from EDSR import build_model
 from utils import get_available_gpus, custom_loss
 
 if __name__ == '__main__':
+    scale = 4
+
     # Parse arguments
     ap = argparse.ArgumentParser()
     ap.add_argument("-p", "--pretrained", help="path to save pretrained model files")
@@ -40,7 +42,7 @@ if __name__ == '__main__':
     num_gpu = len(get_available_gpus())
     if num_gpu >= 2:
         with tf.device("/cpu:0"):
-            model = build_model()
+            model = build_model(scale)
             if pretrained_path is not None:
                 model.load_weights(pretrained_path)
 
@@ -48,7 +50,7 @@ if __name__ == '__main__':
         # rewrite the callback: saving through the original model and not the multi-gpu model.
         model_checkpoint = MyCbk(model)
     else:
-        new_model = build_model()
+        new_model = build_model(scale)
         if pretrained_path is not None:
             new_model.load_weights(pretrained_path)
 
@@ -61,9 +63,9 @@ if __name__ == '__main__':
     callbacks = [tensor_board, model_checkpoint, early_stop, reduce_lr]
 
     # Start Fine-tuning
-    new_model.fit_generator(train_gen(),
+    new_model.fit_generator(train_gen(scale),
                             steps_per_epoch=num_train_samples // batch_size,
-                            validation_data=valid_gen(),
+                            validation_data=valid_gen(scale),
                             validation_steps=num_valid_samples // batch_size,
                             epochs=epochs,
                             verbose=1,

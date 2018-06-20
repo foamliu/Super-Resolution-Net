@@ -4,10 +4,10 @@ from keras.models import Model
 from keras.utils import plot_model
 
 import utils
-from config import img_size, channel, feature_size, kernel, num_layers, scaling_factor, scale
+from config import img_size, channel, feature_size, kernel, num_layers, scaling_factor
 
 
-def build_model():
+def build_model(scale):
     input_tensor = Input(shape=(img_size, img_size, channel))
 
     # One convolution before res blocks and to convert to required feature depth
@@ -64,7 +64,7 @@ def build_model():
 
 
 if __name__ == '__main__':
-    m = build_model()
+    m = build_model(scale=4)
     print(m.summary())
-    plot_model(m, to_file='model.svg', show_layer_names=True, show_shapes=True)
+    plot_model(m, to_file='EDSR.svg', show_layer_names=True, show_shapes=True)
     K.clear_session()
