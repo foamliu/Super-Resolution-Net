@@ -40,7 +40,7 @@ if __name__ == '__main__':
         x = np.expand_dims(x, axis=0)
         out = model.predict(x)
         out = out.reshape((h, w, 3))
-        out = tf.clip_by_value(out, 0.0, 255.0)
+        out = np.clip(out, 0.0, 255.0)
         out = out.astype(np.uint8)
 
         image = cv.resize(x, (h, w), cv.INTER_CUBIC)
