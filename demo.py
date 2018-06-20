@@ -36,6 +36,8 @@ if __name__ == '__main__':
         y = random_crop(image_bgr)
 
         x = cv.resize(y, (img_size, img_size), cv.INTER_CUBIC)
+        image = cv.resize(x, (h, w), cv.INTER_CUBIC)
+
         x = preprocess_input(x.astype(np.float32))
         x_test = np.empty((1, img_size, img_size, 3), dtype=np.float32)
         x_test[0] = x
@@ -43,8 +45,6 @@ if __name__ == '__main__':
         out = out.reshape((h, w, 3))
         out = np.clip(out, 0.0, 255.0)
         out = out.astype(np.uint8)
-
-        image = cv.resize(x, (h, w), cv.INTER_CUBIC)
 
         if not os.path.exists('images'):
             os.makedirs('images')
