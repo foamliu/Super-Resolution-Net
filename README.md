@@ -44,6 +44,7 @@ $ tensorboard --logdir path_to_current_dir/logs
 ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/learning_curve.png)
 
 ### 演示
+下载 [预训练模型](https://github.com/foamliu/Super-Resolution-Net/releases/download/untagged-0b1ce773ce0ef13ac79a/model.16-9.0500.hdf5) 放入 "models" 目录然后执行:
 
 ```bash
 $ python demo.py
