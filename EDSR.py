@@ -4,10 +4,10 @@ from keras.models import Model
 from keras.utils import plot_model
 
 import utils
-from config import img_size, channel, feature_size, kernel, num_layers, scaling_factor
+from config import img_size, channel, kernel
 
 
-def build_model(scale):
+def build_model(num_layers=32, feature_size=256, scale=4, scaling_factor=0.1):
     input_tensor = Input(shape=(img_size, img_size, channel))
 
     # One convolution before res blocks and to convert to required feature depth
