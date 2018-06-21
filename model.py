@@ -59,12 +59,12 @@ def build_model(num_layers=32, feature_size=256, scale=4, scaling_factor=0.1):
 
     outputs = x
 
-    model = Model(inputs=input_tensor, outputs=outputs, name="EDRN")
+    model = Model(inputs=input_tensor, outputs=outputs, name="EDSR")
     return model
 
 
 if __name__ == '__main__':
     m = build_model(scale=4)
     print(m.summary())
-    plot_model(m, to_file='EDSR.svg', show_layer_names=True, show_shapes=True)
+    plot_model(m, to_file='model.svg', show_layer_names=True, show_shapes=True)
     K.clear_session()

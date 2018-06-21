@@ -6,7 +6,7 @@ import cv2 as cv
 import numpy as np
 from keras.utils import Sequence
 import imutils
-from config import batch_size, img_size, channel
+from config import batch_size, img_size, channel, scale
 
 image_folder = '/mnt/code/ImageNet-Downloader/image/resized'
 
@@ -28,9 +28,8 @@ def preprocess_input(x):
 
 
 class DataGenSequence(Sequence):
-    def __init__(self, usage, scale):
+    def __init__(self, usage):
         self.usage = usage
-        self.scale = scale
 
         if usage == 'train':
             names_file = 'train_names.txt'
@@ -48,7 +47,7 @@ class DataGenSequence(Sequence):
     def __getitem__(self, idx):
         i = idx * batch_size
 
-        out_img_rows, out_img_cols = img_size * self.scale, img_size * self.scale
+        out_img_rows, out_img_cols = img_size * scale, img_size * scale
 
         length = min(batch_size, (len(self.names) - i))
         batch_x = np.empty((length, img_size, img_size, channel), dtype=np.float32)
@@ -81,12 +80,12 @@ class DataGenSequence(Sequence):
         np.random.shuffle(self.names)
 
 
-def train_gen(scale):
-    return DataGenSequence('train', scale)
+def train_gen():
+    return DataGenSequence('train')
 
 
-def valid_gen(scale):
-    return DataGenSequence('valid', scale)
+def valid_gen():
+    return DataGenSequence('valid')
 
 
 def split_data():

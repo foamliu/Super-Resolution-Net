@@ -1,6 +1,7 @@
 img_size = 48
 channel = 3
 kernel = 3
+scale = 4
 batch_size = 160
 epochs = 10000
 patience = 50
