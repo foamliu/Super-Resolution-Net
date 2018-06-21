@@ -11,7 +11,7 @@ from config import batch_size, img_size, channel, scale
 image_folder = '/mnt/code/ImageNet-Downloader/image/resized'
 
 
-def random_crop(image_bgr, scale):
+def random_crop(image_bgr):
     full_size = image_bgr.shape[0]
     y_size = img_size * scale
     u = random.randint(0, full_size - y_size)
