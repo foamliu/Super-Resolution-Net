@@ -3,10 +3,10 @@ import os
 import cv2 as cv
 import numpy as np
 from tqdm import tqdm
-
+import json
 from config import img_size, image_folder, scale
 from model import build_model
-from utils import random_crop, preprocess_input
+from utils import random_crop, preprocess_input, psnr
 
 if __name__ == '__main__':
     model_weights_path = 'models/model.16-9.0500.hdf5'
@@ -17,9 +17,15 @@ if __name__ == '__main__':
     with open(names_file, 'r') as f:
         names = f.read().splitlines()
 
+    if os.path.isfile('data/eval.json'):
+        with open('data/eval.json') as file:
+            eval = json.load(file)
+    else:
+        eval = {}
+
     h, w = img_size * scale, img_size * scale
 
-    total_psnr = 0
+    psnr_list = []
 
     for i in tqdm(range(names)):
         name = names[i]
@@ -38,7 +44,11 @@ if __name__ == '__main__':
         out = np.clip(out, 0.0, 255.0)
         out = out.astype(np.uint8)
 
-        psnr = psnr(out, gt)
-        total_psnr += psnr
+        psnr_list.append(psnr(out, gt))
 
-    print('PSNR(avg): {0:.5f}'.format(total_psnr / len(names)))
+    print('num_valid_samples: ' + str(len(names)))
+    print('PSNR(avg): {0:.5f}'.format(np.mean(psnr_list)))
+
+    eval['psnr_list'] = psnr_list
+    with open('data/eval.json', 'w') as file:
+        json.dump(eval, file)
