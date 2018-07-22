@@ -21,7 +21,7 @@ if __name__ == '__main__':
     h, w = img_size * scale, img_size * scale
     psnr_list = []
 
-    for i in tqdm(range(names)):
+    for i in tqdm(range(len(names))):
         name = names[i]
         filename = os.path.join(image_folder, name)
         image_bgr = cv.imread(filename)
