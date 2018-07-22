@@ -62,3 +62,11 @@ $ python demo.py
 |![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_out.png)| $(psnr_7) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_gt.png)|
 |![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_out.png)| $(psnr_8) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_gt.png)|
 |![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_out.png)| $(psnr_9) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_gt.png)|
+
+### 评估效果
+
+```bash
+$ python evaluate.py
+```
+
+在 4268 张验证集图片上测得平均 PSNR 值为： $(avg_psnr) dB。

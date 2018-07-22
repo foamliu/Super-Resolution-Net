@@ -52,13 +52,21 @@ $ python demo.py
 
 输入 | 输出 | PSNR | 目标 |
 |---|---|---|---|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_out.png)| 31.15309 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_gt.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_out.png)| 31.86132 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_gt.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/2_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/2_out.png)| 33.44040 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/2_gt.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/3_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/3_out.png)| 35.57016 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/3_gt.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/4_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/4_out.png)| 30.51059 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/4_gt.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/5_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/5_out.png)| 29.57184 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/5_gt.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/6_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/6_out.png)| 30.87924 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/6_gt.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_out.png)| 32.46647 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_gt.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_out.png)| 28.52447 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_gt.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_out.png)| 40.91339 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_out.png)| 31.15309 dB | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_out.png)| 31.86132 dB | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/2_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/2_out.png)| 33.44040 dB | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/2_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/3_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/3_out.png)| 35.57016 dB | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/3_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/4_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/4_out.png)| 30.51059 dB | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/4_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/5_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/5_out.png)| 29.57184 dB | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/5_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/6_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/6_out.png)| 30.87924 dB | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/6_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_out.png)| 32.46647 dB | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_out.png)| 28.52447 dB | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_out.png)| 40.91339 dB | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_gt.png)|
+
+### 评估效果
+
+```bash
+$ python evaluate.py
+```
+
+在 4268 张验证集图片上测得平均 PSNR 值为： 31.72048 dB。
