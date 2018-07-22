@@ -46,7 +46,6 @@ if __name__ == '__main__':
         out = out.astype(np.uint8)
 
         psnr_list.append(psnr(out, gt))
-        print(psnr)
 
         if not os.path.exists('images'):
             os.makedirs('images')
