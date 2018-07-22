@@ -20,6 +20,7 @@ if __name__ == '__main__':
 
     h, w = img_size * scale, img_size * scale
     psnr_list = []
+    total_bicubic_x4 = 0
 
     for i in tqdm(range(len(names))):
         name = names[i]
@@ -27,9 +28,10 @@ if __name__ == '__main__':
         image_bgr = cv.imread(filename)
         gt = random_crop(image_bgr)
 
-        x = cv.resize(gt, (img_size, img_size), cv.INTER_CUBIC)
-        image = cv.resize(x, (h, w), cv.INTER_CUBIC)
+        input = cv.resize(gt, (img_size, img_size), cv.INTER_CUBIC)
+        bicubic_x4 = cv.resize(input, (img_size * 4, img_size * 4), cv.INTER_CUBIC)
 
+        x = input.copy()
         x = preprocess_input(x.astype(np.float32))
         x_test = np.empty((1, img_size, img_size, 3), dtype=np.float32)
         x_test[0] = x
@@ -38,10 +40,13 @@ if __name__ == '__main__':
         out = np.clip(out, 0.0, 255.0)
         out = out.astype(np.uint8)
 
+        total_bicubic_x4 = psnr(bicubic_x4, gt)
         psnr_list.append(psnr(out, gt))
 
     print('num_valid_samples: ' + str(len(names)))
     print('PSNR(avg): {0:.5f}'.format(np.mean(psnr_list)))
+    bicubic_avg_x4 = total_bicubic_x4 / len(names)
+    print('Bicubicx4(avg): {0:.5f}'.format(bicubic_avg_x4))
 
     if os.path.isfile(eval_path):
         with open(eval_path) as file:
@@ -49,5 +54,6 @@ if __name__ == '__main__':
     else:
         eval_result = {}
     eval_result['psnr_avg'] = np.mean(psnr_list)
+    eval_result['bicubic_avg_x4'] = np.mean(bicubic_avg_x4)
     with open(eval_path, 'w') as file:
         json.dump(eval_result, file)
