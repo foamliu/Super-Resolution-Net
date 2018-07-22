@@ -63,10 +63,9 @@ $ python demo.py
 |![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_out.png)| 28.52447 dB | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_gt.png)|
 |![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_out.png)| 40.91339 dB | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_gt.png)|
 
-### 评估效果
+### 模型评估
+在 4268 张验证集图片上测得 PSNR 并求均值。得到：31.72048 dB。
 
 ```bash
 $ python evaluate.py
 ```
-
-在 4268 张验证集图片上测得平均 PSNR 值为： 31.72048 dB。
