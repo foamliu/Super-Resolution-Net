@@ -1,4 +1,5 @@
 # import the necessary packages
+import json
 import os
 import random
 
@@ -6,7 +7,7 @@ import cv2 as cv
 import keras.backend as K
 import numpy as np
 
-from config import img_size, scale
+from config import img_size, scale, eval_path
 from model import build_model
 from utils import random_crop, preprocess_input, psnr
 
@@ -23,8 +24,8 @@ if __name__ == '__main__':
         names = f.read().splitlines()
 
     samples = random.sample(names, 10)
-
     h, w = img_size * scale, img_size * scale
+    psnr_list = []
 
     for i in range(len(samples)):
         image_name = samples[i]
@@ -44,7 +45,7 @@ if __name__ == '__main__':
         out = np.clip(out, 0.0, 255.0)
         out = out.astype(np.uint8)
 
-        psnr = psnr(out, gt)
+        psnr_list.append(psnr(out, gt))
         print(psnr)
 
         if not os.path.exists('images'):
@@ -53,5 +54,14 @@ if __name__ == '__main__':
         cv.imwrite('images/{}_image.png'.format(i), image)
         cv.imwrite('images/{}_gt.png'.format(i), gt)
         cv.imwrite('images/{}_out.png'.format(i), out)
+
+    if os.path.isfile(eval_path):
+        with open(eval_path) as file:
+            eval_result = json.load(file)
+    else:
+        eval_result = {}
+    eval_result['psnr_list'] = psnr_list
+    with open(eval_path, 'w') as file:
+        json.dump(eval_result, file, indent=4)
 
     K.clear_session()

@@ -18,15 +18,7 @@ if __name__ == '__main__':
     with open(names_file, 'r') as f:
         names = f.read().splitlines()
 
-    if os.path.isfile(eval_path):
-        with open(eval_path) as file:
-            eval = json.load(file)
-    else:
-        eval = {}
-
     h, w = img_size * scale, img_size * scale
-
-    psnr_list = []
 
     for i in tqdm(range(names)):
         name = names[i]
@@ -50,6 +42,11 @@ if __name__ == '__main__':
     print('num_valid_samples: ' + str(len(names)))
     print('PSNR(avg): {0:.5f}'.format(np.mean(psnr_list)))
 
+    if os.path.isfile(eval_path):
+        with open(eval_path) as file:
+            eval_result = json.load(file)
+    else:
+        eval_result = {}
     eval['psnr_list'] = psnr_list
     with open(eval_path, 'w') as file:
-        json.dump(eval, file)
+        json.dump(eval_result, file)
