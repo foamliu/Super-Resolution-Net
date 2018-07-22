@@ -10,4 +10,4 @@ num_valid_samples = 4268
 epsilon = 1e-6
 epsilon_sqr = epsilon ** 2
 image_folder = '/mnt/code/ImageNet-Downloader/image/resized'
-eval_path = 'data/eval.json'
+eval_path = 'eval.json'

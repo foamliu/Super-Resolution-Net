@@ -19,6 +19,7 @@ if __name__ == '__main__':
         names = f.read().splitlines()
 
     h, w = img_size * scale, img_size * scale
+    psnr_list = []
 
     for i in tqdm(range(names)):
         name = names[i]
@@ -47,6 +48,6 @@ if __name__ == '__main__':
             eval_result = json.load(file)
     else:
         eval_result = {}
-    eval['psnr_list'] = psnr_list
+    eval_result['psnr_avg'] = np.mean(psnr_list)
     with open(eval_path, 'w') as file:
         json.dump(eval_result, file)
