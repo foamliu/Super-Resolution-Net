@@ -1,10 +1,11 @@
+import json
 import os
 
 import cv2 as cv
 import numpy as np
 from tqdm import tqdm
-import json
-from config import img_size, image_folder, scale
+
+from config import img_size, image_folder, scale, eval_path
 from model import build_model
 from utils import random_crop, preprocess_input, psnr
 
@@ -17,8 +18,8 @@ if __name__ == '__main__':
     with open(names_file, 'r') as f:
         names = f.read().splitlines()
 
-    if os.path.isfile('data/eval.json'):
-        with open('data/eval.json') as file:
+    if os.path.isfile(eval_path):
+        with open(eval_path) as file:
             eval = json.load(file)
     else:
         eval = {}
@@ -50,5 +51,5 @@ if __name__ == '__main__':
     print('PSNR(avg): {0:.5f}'.format(np.mean(psnr_list)))
 
     eval['psnr_list'] = psnr_list
-    with open('data/eval.json', 'w') as file:
+    with open(eval_path, 'w') as file:
         json.dump(eval, file)
