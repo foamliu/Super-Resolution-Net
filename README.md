@@ -50,15 +50,15 @@ $ tensorboard --logdir path_to_current_dir/logs
 $ python demo.py
 ```
 
-输入 | 输出 | 目标 | 
-|---|---|---|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_out.png)| ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_gt.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_out.png)| ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_gt.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/2_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/2_out.png)| ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/2_gt.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/3_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/3_out.png)| ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/3_gt.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/4_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/4_out.png)| ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/4_gt.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/5_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/5_out.png)| ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/5_gt.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/6_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/6_out.png)| ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/6_gt.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_out.png)| ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_gt.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_out.png)| ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_gt.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_out.png)| ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_gt.png)|
+输入 | 输出 | PSNR | 目标 |
+|---|---|---|---|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_out.png)| 20.91786 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_out.png)| 16.14680 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/2_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/2_out.png)| 17.52064 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/2_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/3_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/3_out.png)| 15.02758 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/3_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/4_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/4_out.png)| 25.32454 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/4_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/5_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/5_out.png)| 22.47057 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/5_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/6_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/6_out.png)| 22.70852 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/6_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_out.png)| 15.75109 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_out.png)| 16.75907 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_gt.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_image.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_out.png)| 19.19633 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_gt.png)|
