@@ -3,28 +3,12 @@ import random
 from random import shuffle
 
 import cv2 as cv
+import imutils
 import numpy as np
 from keras.utils import Sequence
-import imutils
-from config import batch_size, img_size, channel, scale
 
-image_folder = '/mnt/code/ImageNet-Downloader/image/resized'
-
-
-def random_crop(image_bgr):
-    full_size = image_bgr.shape[0]
-    y_size = img_size * scale
-    u = random.randint(0, full_size - y_size)
-    v = random.randint(0, full_size - y_size)
-    y = image_bgr[v:v + y_size, u:u + y_size]
-    return y
-
-
-def preprocess_input(x):
-    x /= 255.
-    x -= 0.5
-    x *= 2.
-    return x
+from config import batch_size, img_size, channel, scale, image_folder
+from utils import random_crop, preprocess_input
 
 
 class DataGenSequence(Sequence):

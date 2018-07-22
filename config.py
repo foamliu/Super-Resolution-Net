@@ -9,3 +9,4 @@ num_train_samples = 781987
 num_valid_samples = 6307
 epsilon = 1e-6
 epsilon_sqr = epsilon ** 2
+image_folder = '/mnt/code/ImageNet-Downloader/image/resized'

@@ -1,35 +1,29 @@
-# import the necessary packages
 import os
-import random
 
 import cv2 as cv
-import keras.backend as K
 import numpy as np
+from tqdm import tqdm
 
-from config import img_size, scale
+from config import img_size, image_folder, scale
 from model import build_model
-from utils import random_crop, preprocess_input, psnr
+from utils import random_crop, preprocess_input
 
 if __name__ == '__main__':
     model_weights_path = 'models/model.16-9.0500.hdf5'
     model = build_model()
     model.load_weights(model_weights_path)
 
-    print(model.summary())
-
-    image_folder = '/mnt/code/ImageNet-Downloader/image/resized'
     names_file = 'valid_names.txt'
     with open(names_file, 'r') as f:
         names = f.read().splitlines()
 
-    samples = random.sample(names, 10)
-
     h, w = img_size * scale, img_size * scale
 
-    for i in range(len(samples)):
-        image_name = samples[i]
-        filename = os.path.join(image_folder, image_name)
-        print('Start processing image: {}'.format(filename))
+    total_psnr = 0
+
+    for i in tqdm(range(names)):
+        name = names[i]
+        filename = os.path.join(image_folder, name)
         image_bgr = cv.imread(filename)
         gt = random_crop(image_bgr)
 
@@ -45,13 +39,6 @@ if __name__ == '__main__':
         out = out.astype(np.uint8)
 
         psnr = psnr(out, gt)
-        print(psnr)
+        total_psnr += psnr
 
-        if not os.path.exists('images'):
-            os.makedirs('images')
-
-        cv.imwrite('images/{}_image.png'.format(i), image)
-        cv.imwrite('images/{}_gt.png'.format(i), gt)
-        cv.imwrite('images/{}_out.png'.format(i), out)
-
-    K.clear_session()
+    print('PSNR(avg): {0:.5f}'.format(total_psnr / len(names)))
