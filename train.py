@@ -5,7 +5,7 @@ import tensorflow as tf
 from keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
 from keras.utils import multi_gpu_model
 
-from config import patience, epochs, num_train_samples, num_valid_samples, batch_size
+from config import patience, epochs, num_train_samples, num_valid_samples, batch_size, scale
 from data_generator import train_gen, valid_gen
 from model import build_model
 from utils import get_available_gpus
@@ -20,7 +20,7 @@ if __name__ == '__main__':
 
     # Callbacks
     tensor_board = keras.callbacks.TensorBoard(log_dir='./logs', histogram_freq=0, write_graph=True, write_images=True)
-    model_names = checkpoint_models_path + 'model.{epoch:02d}-{val_loss:.4f}.hdf5'
+    model_names = checkpoint_models_path + 'model.x' + scale + '-{epoch:02d}-{val_loss:.4f}.hdf5'
     model_checkpoint = ModelCheckpoint(model_names, monitor='val_loss', verbose=1, save_best_only=True)
     early_stop = EarlyStopping('val_loss', patience=patience)
     reduce_lr = ReduceLROnPlateau('val_loss', factor=0.1, patience=int(patience / 4), verbose=1)
@@ -40,7 +40,7 @@ if __name__ == '__main__':
     num_gpu = len(get_available_gpus())
     if num_gpu >= 2:
         with tf.device("/cpu:0"):
-            model = build_model()
+            model = build_model(scale=scale)
             if pretrained_path is not None:
                 model.load_weights(pretrained_path)
 
@@ -48,7 +48,7 @@ if __name__ == '__main__':
         # rewrite the callback: saving through the original model and not the multi-gpu model.
         model_checkpoint = MyCbk(model)
     else:
-        new_model = build_model()
+        new_model = build_model(scale=scale)
         if pretrained_path is not None:
             new_model.load_weights(pretrained_path)
 
