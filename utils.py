@@ -9,7 +9,7 @@ import tensorflow as tf
 from keras.layers import Conv2D, Add, Lambda
 from tensorflow.python.client import device_lib
 
-from config import img_size, scale, kernel, epsilon_sqr
+from config import img_size, kernel, epsilon_sqr
 
 
 def custom_loss(y_true, y_pred):
@@ -126,7 +126,7 @@ def draw_str(dst, target, s):
     cv.putText(dst, s, (x, y), cv.FONT_HERSHEY_PLAIN, 1.0, (255, 255, 255), lineType=cv.LINE_AA)
 
 
-def random_crop(image_bgr):
+def random_crop(image_bgr, scale):
     full_size = image_bgr.shape[0]
     y_size = img_size * scale
     u = random.randint(0, full_size - y_size)
@@ -153,3 +153,14 @@ def psnr(img1, img2):
         return 100
     PIXEL_MAX = 255.0
     return 20 * math.log10(PIXEL_MAX / math.sqrt(mse))
+
+
+def get_example_numbers():
+    with open('train_names.txt', 'r') as f:
+        names = f.read().splitlines()
+        num_train_samples = len(names)
+    with open('valid_names.txt', 'r') as f:
+        names = f.read().splitlines()
+        num_valid_samples = len(names)
+    return num_train_samples, num_valid_samples
+
