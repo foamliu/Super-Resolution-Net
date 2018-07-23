@@ -64,7 +64,7 @@ def build_model(num_layers=32, feature_size=256, scaling_factor=0.1):
 
 
 if __name__ == '__main__':
-    m = build_model(scale=4)
+    m = build_model()
     print(m.summary())
     plot_model(m, to_file='model.svg', show_layer_names=True, show_shapes=True)
     K.clear_session()
