@@ -136,9 +136,14 @@ def random_crop(image_bgr):
 
 
 def preprocess_input(x):
-    x /= 255.
-    x -= 0.5
-    x *= 2.
+    # subtract the mean RGB value of the ImageNet dataset.
+    b_mean = 104.00698793
+    g_mean = 116.66876762
+    r_mean = 122.67891434
+    x = x.astype(np.float32)
+    x[:, :, 0] -= b_mean
+    x[:, :, 1] -= g_mean
+    x[:, :, 2] -= r_mean
     return x
 
 

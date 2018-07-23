@@ -37,7 +37,7 @@ if __name__ == '__main__':
         x = cv.resize(gt, (img_size, img_size), cv.INTER_CUBIC)
         image = cv.resize(x, (h, w), cv.INTER_CUBIC)
 
-        x = preprocess_input(x.astype(np.float32))
+        x = preprocess_input(x)
         x_test = np.empty((1, img_size, img_size, 3), dtype=np.float32)
         x_test[0] = x
         out = model.predict(x_test)

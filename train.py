@@ -8,7 +8,7 @@ from keras.utils import multi_gpu_model
 from config import patience, epochs, num_train_samples, num_valid_samples, batch_size
 from data_generator import train_gen, valid_gen
 from model import build_model
-from utils import get_available_gpus, custom_loss
+from utils import get_available_gpus
 
 if __name__ == '__main__':
     # Parse arguments
@@ -52,8 +52,8 @@ if __name__ == '__main__':
         if pretrained_path is not None:
             new_model.load_weights(pretrained_path)
 
-    adam = keras.optimizers.Adam(lr=1e-4, epsilon=1e-8)
-    new_model.compile(optimizer=adam, loss=custom_loss)
+    adam = keras.optimizers.Adam(lr=1e-4, epsilon=1e-8, decay=1e-6)
+    new_model.compile(optimizer=adam, loss='mean_absolute_error')
 
     print(new_model.summary())
 

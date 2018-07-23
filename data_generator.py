@@ -38,25 +38,23 @@ class DataGenSequence(Sequence):
         batch_y = np.empty((length, out_img_rows, out_img_cols, channel), dtype=np.float32)
 
         for i_batch in range(length):
-            name = self.names[i]
+            name = self.names[i + i_batch]
             filename = os.path.join(image_folder, name)
             # b: 0 <=b<=255, g: 0 <=g<=255, r: 0 <=r<=255.
             image_bgr = cv.imread(filename)
 
-            y = random_crop(image_bgr)
+            gt = random_crop(image_bgr)
 
             if np.random.random_sample() > 0.5:
-                y = np.fliplr(y)
+                gt = np.fliplr(gt)
 
             angle = random.choice((0, 90, 180, 270))
-            y = imutils.rotate_bound(y, angle)
+            gt = imutils.rotate_bound(gt, angle)
 
-            x = cv.resize(y, (img_size, img_size), cv.INTER_CUBIC)
+            x = cv.resize(gt, (img_size, img_size), cv.INTER_CUBIC)
 
-            batch_x[i_batch, :, :] = preprocess_input(x.astype(np.float32))
-            batch_y[i_batch, :, :] = y
-
-            i += 1
+            batch_x[i_batch, :, :] = preprocess_input(x)
+            batch_y[i_batch, :, :] = gt
 
         return batch_x, batch_y
 

@@ -1,12 +1,12 @@
 img_size = 48
 channel = 3
 kernel = 3
-scale = 4
-batch_size = 160
+scale = 2
+batch_size = 16
 epochs = 10000
 patience = 50
-num_train_samples = 529202
-num_valid_samples = 4268
+num_train_samples = 519244
+num_valid_samples = 4188
 epsilon = 1e-6
 epsilon_sqr = epsilon ** 2
 image_folder = '/mnt/code/ImageNet-Downloader/image/resized'
