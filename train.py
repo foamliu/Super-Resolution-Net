@@ -42,7 +42,7 @@ if __name__ == '__main__':
         with tf.device("/cpu:0"):
             model = build_model(scale=scale)
             if pretrained_path is not None:
-                model.load_weights(pretrained_path)
+                model.load_weights(pretrained_path, by_name=True)
 
         new_model = multi_gpu_model(model, gpus=num_gpu)
         # rewrite the callback: saving through the original model and not the multi-gpu model.
@@ -50,7 +50,7 @@ if __name__ == '__main__':
     else:
         new_model = build_model(scale=scale)
         if pretrained_path is not None:
-            new_model.load_weights(pretrained_path)
+            new_model.load_weights(pretrained_path, by_name=True)
 
     adam = keras.optimizers.Adam(lr=1e-4, epsilon=1e-8, decay=1e-6)
     new_model.compile(optimizer=adam, loss='mean_absolute_error')
