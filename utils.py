@@ -128,11 +128,15 @@ def draw_str(dst, target, s):
 
 def random_crop(image_bgr, scale):
     full_size = image_bgr.shape[0]
-    y_size = img_size * scale
-    u = random.randint(0, full_size - y_size)
-    v = random.randint(0, full_size - y_size)
-    y = image_bgr[v:v + y_size, u:u + y_size]
-    return y
+    gt_size = img_size * scale
+    u = random.randint(0, full_size - gt_size)
+    v = random.randint(0, full_size - gt_size)
+    gt = image_bgr[v:v + gt_size, u:u + gt_size]
+    if gt.shape[0] < gt_size or gt.shape[1] < gt_size:
+        temp = np.zeros((gt_size, gt_size))
+        temp[0:gt.shape[0], 0:gt.shape[1], :] = gt
+        gt = temp
+    return gt
 
 
 def preprocess_input(x):
@@ -163,4 +167,3 @@ def get_example_numbers():
         names = f.read().splitlines()
         num_valid_samples = len(names)
     return num_train_samples, num_valid_samples
-
