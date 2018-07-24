@@ -127,15 +127,18 @@ def draw_str(dst, target, s):
 
 
 def random_crop(image_bgr, scale):
-    full_size = image_bgr.shape[0]
+    full_height, full_width = image_bgr.shape[:2]
     gt_size = img_size * scale
-    u = random.randint(0, full_size - gt_size)
-    v = random.randint(0, full_size - gt_size)
-    gt = image_bgr[v:v + gt_size, u:u + gt_size]
-    if gt.shape[0] < gt_size or gt.shape[1] < gt_size:
-        temp = np.zeros((gt_size, gt_size, 3))
-        temp[0:gt.shape[0], 0:gt.shape[1], :] = gt
-        gt = temp
+    if full_height < gt_size or full_width < gt_size:
+        gt = np.zeros((gt_size, gt_size, 3))
+        u = min(full_width, gt_size)
+        v = min(full_height, gt_size)
+        gt[0:v, 0:u, :] = image_bgr[0:v, 0:u, :]
+    else:
+        u = random.randint(0, full_width - gt_size)
+        v = random.randint(0, full_height - gt_size)
+        gt = image_bgr[v:v + gt_size, u:u + gt_size]
+
     return gt
 
 
