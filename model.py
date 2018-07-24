@@ -1,3 +1,5 @@
+import argparse
+
 import keras.backend as K
 from keras.layers import Input, Conv2D, Add
 from keras.models import Model
@@ -64,7 +66,11 @@ def build_model(scale, num_layers=32, feature_size=256, scaling_factor=0.1):
 
 
 if __name__ == '__main__':
-    m = build_model(scale=2)
+    ap = argparse.ArgumentParser()
+    ap.add_argument("-s", "--scale", help="scale")
+    args = vars(ap.parse_args())
+    scale = int(args["scale"])
+    m = build_model(scale)
     print(m.summary())
     plot_model(m, to_file='model.svg', show_layer_names=True, show_shapes=True)
     K.clear_session()
