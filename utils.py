@@ -133,7 +133,7 @@ def random_crop(image_bgr, scale):
     v = random.randint(0, full_size - gt_size)
     gt = image_bgr[v:v + gt_size, u:u + gt_size]
     if gt.shape[0] < gt_size or gt.shape[1] < gt_size:
-        temp = np.zeros((gt_size, gt_size))
+        temp = np.zeros((gt_size, gt_size, 3))
         temp[0:gt.shape[0], 0:gt.shape[1], :] = gt
         gt = temp
     return gt
