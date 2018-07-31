@@ -1,7 +1,6 @@
 img_size = 48
 channel = 3
 kernel = 3
-# scale = 2
 batch_size = 16
 epochs = 10000
 patience = 50
@@ -11,3 +10,6 @@ epsilon = 1e-6
 epsilon_sqr = epsilon ** 2
 image_folder = '/mnt/code/ImageNet-Downloader/image/resized'
 eval_path = 'eval.json'
+
+best_model = {'x2': 'model.x2-09-4.0598.hdf5', 'x3': 'model.x3-07-6.8288.hdf5', 'x4': 'model.x4-09-8.1142.hdf5'}
+
