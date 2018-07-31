@@ -13,9 +13,13 @@ if __name__ == '__main__':
     template = ''.join(template)
 
     for i in range(10):
-        template = template.replace('$(psnr_{})'.format(i), '{0:.5f} dB'.format(eval_result['psnr_list'][i]))
+        template = template.replace('$(psnr_{}_x2)'.format(i), '{0:.5f}'.format(eval_result['psnr_list_x2'][i]))
+        template = template.replace('$(psnr_{}_x3)'.format(i), '{0:.5f}'.format(eval_result['psnr_list_x3'][i]))
+        template = template.replace('$(psnr_{}_x4)'.format(i), '{0:.5f}'.format(eval_result['psnr_list_x4'][i]))
 
-    template = template.replace('$(avg_psnr)', '{0:.5f}'.format(eval_result['psnr_avg']))
+    template = template.replace('$(psnr_avg_x2)', '{0:.5f} dB'.format(eval_result['psnr_avg_x2']))
+    template = template.replace('$(psnr_avg_x3)', '{0:.5f} dB'.format(eval_result['psnr_avg_x3']))
+    template = template.replace('$(psnr_avg_x4)', '{0:.5f} dB'.format(eval_result['psnr_avg_x4']))
 
     with open('README.md', 'w', encoding="utf-8") as file:
         file.write(template)

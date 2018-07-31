@@ -2,3 +2,5 @@
 __pycache__/
 models/
 logs/
+train_names.txt
+valid_names.txt
