@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
     h, w = img_size * scale, img_size * scale
     psnr_list = []
-    total_bicubic = 0
+    bicubic_list = []
 
     for i in tqdm(range(len(names))):
         name = names[i]
@@ -49,14 +49,13 @@ if __name__ == '__main__':
         out = np.clip(out, 0.0, 255.0)
         out = out.astype(np.uint8)
 
-        total_bicubic += psnr(bicubic, gt)
+        bicubic_list.append(psnr(bicubic, gt))
         psnr_list.append(psnr(out, gt))
 
     print('num_valid_samples: ' + str(len(names)))
     print('scale: ' + str(scale))
     print('PSNR(avg): {0:.5f}'.format(np.mean(psnr_list)))
-    bicubic_avg = total_bicubic / len(names)
-    print('Bicubic(avg): {0:.5f}'.format(bicubic_avg))
+    print('Bicubic(avg): {0:.5f}'.format(np.mean(bicubic_list)))
 
     if os.path.isfile(eval_path):
         with open(eval_path) as file:
@@ -64,7 +63,7 @@ if __name__ == '__main__':
     else:
         eval_result = {}
     eval_result['psnr_avg_x{}'.format(scale)] = np.mean(psnr_list)
-    eval_result['bicubic_avg_x{}'.format(scale)] = bicubic_avg
+    eval_result['bicubic_avg_x{}'.format(scale)] = np.mean(bicubic_list)
     with open(eval_path, 'w') as file:
         json.dump(eval_result, file)
 
