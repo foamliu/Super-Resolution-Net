@@ -65,6 +65,6 @@ if __name__ == '__main__':
     eval_result['psnr_avg_x{}'.format(scale)] = np.mean(psnr_list)
     eval_result['bicubic_avg_x{}'.format(scale)] = np.mean(bicubic_list)
     with open(eval_path, 'w') as file:
-        json.dump(eval_result, file)
+        json.dump(eval_result, file, indent=4)
 
     K.clear_session()
