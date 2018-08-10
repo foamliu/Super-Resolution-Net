@@ -27,6 +27,14 @@ EDSR (单尺度模型。 我们提供尺寸x4的模型):
 
 按照 [说明](https://github.com/foamliu/ImageNet-Downloader) 下载 ImageNet 数据集。
 
+## 预训练模型
+
+|---|x2|x3|x4|
+|---|---|---|---|
+|下载|[链接](https://github.com/foamliu/Super-Resolution-Net/releases/download/untagged-0b1ce773ce0ef13ac79a/model.x2-09-4.0598.hdf5)|[链接](https://github.com/foamliu/Super-Resolution-Net/releases/download/untagged-0b1ce773ce0ef13ac79a/model.x3-07-6.8288.hdf5)|[链接](https://github.com/foamliu/Super-Resolution-Net/releases/download/untagged-0b1ce773ce0ef13ac79a/model.x4-09-8.1142.hdf5)|
+|PSNR|$(psnr_avg_x2)|$(psnr_avg_x3)|$(psnr_avg_x4)|
+
+
 
 ## 如何使用
 

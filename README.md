@@ -27,6 +27,14 @@ EDSR (单尺度模型。 我们提供尺寸x4的模型):
 
 按照 [说明](https://github.com/foamliu/ImageNet-Downloader) 下载 ImageNet 数据集。
 
+## 预训练模型
+
+|---|x2|x3|x4|
+|---|---|---|---|
+|下载|[链接](https://github.com/foamliu/Super-Resolution-Net/releases/download/untagged-0b1ce773ce0ef13ac79a/model.x2-09-4.0598.hdf5)|[链接](https://github.com/foamliu/Super-Resolution-Net/releases/download/untagged-0b1ce773ce0ef13ac79a/model.x3-07-6.8288.hdf5)|[链接](https://github.com/foamliu/Super-Resolution-Net/releases/download/untagged-0b1ce773ce0ef13ac79a/model.x4-09-8.1142.hdf5)|
+|PSNR|36.53 dB|34.01 dB|32.77 dB|
+
+
 
 ## 如何使用
 
@@ -94,7 +102,7 @@ $ python demo.py -s [2, 3, 4]
 |![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_out_x4.png)| 29.96366 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_gt_x4.png)|
 
 ### 模型评估
-在 4268 张验证集图片上测得 PSNR 并求均值：x2=36.52617 dB, x3=34.01292 dB, x4=32.76798 dB。
+在 4268 张验证集图片上测得 PSNR 并求均值：x2=36.53 dB, x3=34.01 dB, x4=32.77 dB。
 
 ```bash
 $ python evaluate.py -s [2, 3, 4]
