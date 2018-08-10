@@ -41,8 +41,6 @@ $ python train.py
 $ tensorboard --logdir path_to_current_dir/logs
 ```
 
-![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/learning_curve.png)
-
 ### 演示
 下载 [预训练模型](https://github.com/foamliu/Super-Resolution-Net/releases/download/untagged-0b1ce773ce0ef13ac79a/model.16-9.0500.hdf5) 放入 "models" 目录然后执行:
 
@@ -84,19 +82,19 @@ $ python demo.py -s [2, 3, 4]
 
 输入 | 输出 | PSNR | 目标 |
 |---|---|---|---|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_out_x4.png)| 36.14261 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_gt_x4.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_out_x4.png)| 34.55068 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_gt_x4.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/2_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/2_out_x4.png)| 28.74133 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/2_gt_x4.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/3_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/3_out_x4.png)| 30.53005 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/3_gt_x4.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/4_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/4_out_x4.png)| 30.85291 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/4_gt_x4.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/5_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/5_out_x4.png)| 32.00084 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/5_gt_x4.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/6_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/6_out_x4.png)| 31.75487 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/6_gt_x4.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_out_x4.png)| 32.94882 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_gt_x4.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_out_x4.png)| 30.10912 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_gt_x4.png)|
-|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_out_x4.png)| 32.22449 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_gt_x4.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_out_x4.png)| 30.29251 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/0_gt_x4.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_out_x4.png)| 32.79902 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/1_gt_x4.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/2_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/2_out_x4.png)| 34.56922 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/2_gt_x4.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/3_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/3_out_x4.png)| 30.18427 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/3_gt_x4.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/4_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/4_out_x4.png)| 33.23150 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/4_gt_x4.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/5_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/5_out_x4.png)| 33.11997 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/5_gt_x4.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/6_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/6_out_x4.png)| 29.57066 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/6_gt_x4.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_out_x4.png)| 33.09058 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/7_gt_x4.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_out_x4.png)| 34.80349 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/8_gt_x4.png)|
+|![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_image_x4.png) | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_out_x4.png)| 33.51843 | ![image](https://github.com/foamliu/Super-Resolution-Net/raw/master/images/9_gt_x4.png)|
 
 ### 模型评估
-在 4268 张验证集图片上测得 PSNR 并求均值：x2=36.50111 dB, x3=33.88247 dB, x4=32.76783 dB。
+在 4268 张验证集图片上测得 PSNR 并求均值：x2=36.50111 dB, x3=33.88247 dB, x4=32.78418 dB。
 
 ```bash
 $ python evaluate.py -s [2, 3, 4]
